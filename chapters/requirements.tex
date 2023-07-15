@@ -1,1 +1,36 @@
 \chapter{Requirements}
+
+\section{Functional Requirements}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|p{1cm}||p{3cm}|p{9cm}|}
+    \hline
+	  FR & Name & Description \\
+	\hline
+	FR 1 & Application    & The Application should be a REST Api written in Kotlin, accessible through the web \\
+    \hline
+	FR 2 & Authentication & Each Request to the API should be authenticated with a JSON web token \\
+	\hline
+    FR 3 & User Queries & The Application should provide a Route to all information of a user the application has saved, like the userid or username \\
+	\hline
+    FR 4 & User Mutation & The Application should provide a Route to modify user specific information \\
+	\hline
+    FR 5 & Item Queries & The Application should provide a Route for all information of an item the application has saved \\
+	\hline
+    FR 6 & Item Mutations & The Application should provide a Route to modify item specific information \\
+	\hline
+    FR 7 & Rating Queries & The Application should provide a Route to get all Ratings of all Users at once or a specific user or item \\
+	\hline
+    FR 8 & User Similarity & The Application should provide a Route to get all Similarities of a specific user and Similarity Algorithm to all other users in form of a number  \\
+	\hline
+    FR 9 & Item Similarity & The Application should provide a Route to get all Similarities of a specific item and Similarity Algorithm to all other items in form of a number \\
+	\hline
+\end{tabular}
+\end{center}
+\caption{Functional Requirements}
+\label{tab:fas}
+\end{table}
+
+
+\section{Non-Functional Requirements}

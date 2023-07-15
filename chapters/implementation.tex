@@ -5,20 +5,111 @@
 
 \subsection{Kotlin Library Ktorm}
 
+\subsection{Koin}
+
+Koin is a dependency injection framework that is available for the Kotlin programming language (https://insert-koin.io/). In this Application we use Koin to manage Objects like a Database object that is shared between asynchronous Route Objects and make it accessible.
+
+\begin{minted}{kotlin}
+startKoin {
+    modules(
+        org.koin.dsl.module {
+            single { config }
+            single(qualifier("main")) { config.databases.main }
+            single { logger }
+            single { BpmDatabase() }
+            single { JwtConfig(config.token) }
+        },
+        RecommenderRoutes.koinModule()
+    )
+}
+\end{minted}
+ 
+
 \section{Architecture}
 
-\subsection{Plugins}
+\subsection{Ktor Plugins}
+
 \subsubsection{CORS}
 \subsubsection{Authentication}
 \subsubsection{Serialization}
 
+The application uses JSON as Content Negotiation as defined in the functional requirements. The kotlin serialization plugin in combination with Ktorm enables the Application to send Kotlin Objects while the serialization plugin transform the objects to JSON and also transforms JSON within a http body to Kotlin object. 
+
+\begin{minted}{kotlin}
+install(ContentNegotiation) {
+    json()
+}
+\end{minted}
+
+
+\subsection{Application Startup}
+
+Application Startup ...
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\includesvg{images/StartupBachelor.drawio.svg}
+\caption{\label{fig:startup}description}
+\end{figure}
+
 \subsection{Routing}
 
-\subsection{Interfaces}
+\subsection{Database Access Objects}
 
 \section{Recommendation Algorithms}
 
+\subsection{Similarity Measures}
+
+All similarity measures implement an Interface to facilitate the use of the algorithms.
+
+\begin{minted}{kotlin}
+interface SimilarityMeasure {
+    /**
+     * compares 2 data maps and returns a similarity measure,
+     * note: comparing the result of this function only works 
+     * within the same Similarity Measure!
+     *
+     * @param dataA the first data set
+     * (key: is the item, value: the rating of the item)
+     * @param dataB the second data set
+     * (key: is the item, value: the rating of the item)
+     * @param allItems all the items referenced in data1 & 2
+     */
+    fun compare(
+        dataA: Map<String, Int>,
+        dataB: Map<String, Int>,
+        allItems: List<String>
+    ): Number
+}
+\end{minted}
+
 \subsubsection{Euklid}
+
+The Euklidian Algorithm is a basic Similarity measure and is defined like:
+
+\begin{equation}
+S_{e} = \frac{1}{1-\sqrt{\sum{(dataA - dataB)^2}}}
+\label{euklid}
+\end{equation}
+
+DataA and DataB refer to the ratings of two different users or items.
+The implementation in Kotlin looks like this:
+
+\begin{minted}{kotlin}
+override fun compare(
+    dataA: Map<String, Int>,
+    dataB: Map<String, Int>,
+    allItems: List<String>
+): Number {
+    return 1 / (1 + sqrt(allItems.sumOf { 
+        ((dataA[it] ?: 0) - (dataB[it] ?: 0)).toDouble().pow(2) 
+    }))
+}
+\end{minted}
+
+The difference of DataA and DataB is an Integer but is transformed into a double as the pow() function of the kotlin standard library is only defined on floats and doubles.
 
 \subsubsection{Cosine}
 
