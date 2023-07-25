@@ -2,4 +2,77 @@
 
 \section{Recommender Systems}
 
+A recommender system uses data to suggest potentially interesting items to users, including items that the a user may not have heard of before \cite{LU20121}. Items refer to products, services or other objects that can be evaluated. 
+
+The recommendations produced by a recommender system can be personalized recommendations and may differ from user to user \cite{LU20121}. These recommendations can be represented by scores on unrated items. A higher score indicates that an item could be preferred over an item with a lower score.
+
+In the following we define a target user where we try to find a recommendation for set user.
+
+We now classify recommender systems like \cite{LU20121, itemColFiltRecom} into:
+
+\begin{itemize}
+    \item Content-based Filtering: recommendations are generated through item characteristics and user ratings
+    \item Collaborative Filtering: recommendations are based only on previously made ratings by a target user and all other users. 
+\end{itemize}
+
+In this work, we only use algorithms that are in the Collaborative Filtering domain. 
+
+The Collaborative Filtering approach can be further divided into:
+
+\begin{itemize}
+    \item User (or memory) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach uses all user ratings and compares the target user with all other user ratings to find users similar to the target user \cite{itemColFiltRecom}. 
+    
+    %%%%%%%%%% das hier könnte ein zitat sein nochmal überprüfen %%%%%%%%%%%%%%%%%%%%%%
+    This approach is based on the assumption that if users have been able to agree on something in the past, they will be able to  agree on it in the future \cite{LU20121}.  
+    %%%%%%%%%%%%%%% ende %%%%%%%%%%%%%%%%%%%
+
+    
+    \item Item (or modeling) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach compares only the ratings of the target item with the ratings of other items. This allows a similarity between items to be found \cite{itemColFiltRecom}.
+\end{itemize}
+
+A representative rating would be, for example, the 5 star rating system used by Amazon and other stores \cite{LU20121, miningOfMassiveDatasets}. On this basis, a user can evaluate and rate a consumed item. Another rating system could be an implicit system, where consuming an item generates a rating \cite{miningOfMassiveDatasets}. In this case, the rating wouldn't reflect whether a user actually liked the item.
+
+
+\subsection{Similarity}
+
+In this section we will mainly talk about user-based collaborative filtering, the same applies to item-based collaborative filtering. We will explicitly address the differences.
+
+An important task in recommending items to a target user is to determine how similar the target user is to other users. To get a better understanding of how similarity between users can work, similarity is treated as a distance: the closer users are to each other, the more similar they are. We consider the following algorithms to calculate such a distance:
+
+\begin{itemize}
+    \item  Euclidean distance: This algorithm makes use of the euclidean distance between two vectors \cite{miningOfMassiveDatasets}. In this case, we take all of a user's ratings as a vector in an n-dimensional space, where n is the number of items. We can then calculate the distance to another vector, or in this case another user. One problem with this algorithm is how to deal with unrated items, since we can't compare two points with different dimensions. In this case we simply set the unvalued points to zero, so that the two points have the same dimensions again.
+
+    \item Cosine distance: This algorithm has a similar approach to the Euclidean distance, but with the cosine distance we compare the angle of the direction of the vectors \cite{miningOfMassiveDatasets}. In this case, we don't consider the length of the vector, which can make the recommendation worse.
+
+    \item Pearson distance (Adjusted Cosine for Item based Collaborative Filtering): With Pearson, we use the same approach as with cosine distance, but in this case we normalise the ratings of all users. Normalisation avoids the problem of unrated items being given too much weight in the final recommendation \cite{miningOfMassiveDatasets}. This is the case when there is a user bias, that is, when the user is rating items in an overwhelmingly positive or negative way.
+
+With the adjusted cosine in item-based filtering, we don't want to normalise the item ratings because the item bias is the recommendation. Instead, we also normalise the user ratings as we do with the Pearson distance and then use the adjusted ratings for the cosine distance \cite{miningOfMassiveDatasets}.
+
+\end{itemize}
+
+Using these similarity measures, we can now select the most similar neighbours.
+
+\subsection{Recommend}
+
+Once we have found the k nearest neighbours, we can calculate an estimated rating of an unrated item for the target user. 
+
+With user-based collaborative filtering, we look at the ratings of the k nearest users of an item that the target user hasn't rated. The average of these ratings can then be used as an indicator of whether or not the target user would like the item.
+
+\begin{equation}
+M_{u} = \frac{\sum_{i=1}^{k}{rating_i}}{k}
+\label{mean}
+\end{equation}
+
+We can also take the weighted average to get a potentially more accurate recommendation:
+
+\begin{equation}
+M_{w} = \frac{\sum_{i=1}^{k}{rating_i * similarity_i}}{\sum_{i=1}^{k}{similarity_i}}
+\label{weightedMean}
+\end{equation}
+
+
+This estimate reflects a possible rating of the target user and has the advantage that it can also be used to check the recommendation by trying to guess a rating the user has already given and checking how much the estimated rating differs from the actual rating \cite{miningOfMassiveDatasets}. 
+
+
 \section{Business Process Modelling Notations}
+
