@@ -1,1 +1,12 @@
 \chapter{Conclusion}
+
+\section{Limitations}
+
+Das Kapitel muss eventuel wo anders hin da hier nochmal was neues kommt.
+
+As in \cite{itemColFiltRecom} described, the recommendation algorithms used have problems with:
+
+\begin{itemize}
+    \item Sparsity: If the ratings table is nearly empty, the recommendation may break down, as single ratings can push the recommendation to an item that wouldn't normally be selected.
+    \item Scalability: Currently, for each recommendation request, the API makes a database request for all ratings for all users and calculates the recommendation for a given user. This is currently acceptable as there aren't many items and reviews. This can be mitigated through caching but not solved... 
+\end{itemize}

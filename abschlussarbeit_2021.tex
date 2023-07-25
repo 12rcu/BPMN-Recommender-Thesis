@@ -62,6 +62,7 @@ BCOR15mm               % Bindekorrektur
 % custom
 \usepackage{minted}
 \usepackage{svg}
+\usepackage{longtable}
 
 % hier Namen etc. einsetzen
 \newcommand{\fullname}{Matthias Klenz}
@@ -153,14 +154,16 @@ This work is licensed under the Creative Commons Attribution 4.0 International (
 \tableofcontents
 
 \mainmatter
-\input{chapters/einleitung}
+%\input{chapters/einleitung}
 % hier weitere Kapitel einbinden
 
+\input{chapters/introduction}
 \input{chapters/background}
 \input{chapters/requirements}
 \input{chapters/implementation}
 \input{chapters/demo}
 \input{chapters/deployment}
+\input{chapters/reqChecking}
 \input{chapters/conclusion}
 
 \appendix

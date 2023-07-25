@@ -2,35 +2,50 @@
 
 \section{Functional Requirements}
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|p{1cm}||p{3cm}|p{9cm}|}
+%\begin{table}[h]
+%\begin{center}
+\begin{longtable}{|p{1.2cm}||p{3.2cm}|p{9cm}|}
     \hline
 	  FR & Name & Description \\
 	\hline
-	FR 1 & Application    & The Application should be a REST Api written in Kotlin, accessible through the web \\
+	FR 1 & Application    & The application should be a REST Api written in Kotlin, accessible through the web \\
     \hline
 	FR 2 & Authentication & Each Request to the API should be authenticated with a JSON web token \\
 	\hline
-    FR 3 & User Queries & The Application should provide a Route to all information of a user the application has saved, like the userid or username \\
+    FR 3 & User Queries & The application should provide a route to any information about a user that the application has stored, such as the userid or username \\
 	\hline
-    FR 4 & User Mutation & The Application should provide a Route to modify user specific information \\
+    FR 4 & User Mutation & The application should provide a Route to modify and add users \\
 	\hline
-    FR 5 & Item Queries & The Application should provide a Route for all information of an item the application has saved \\
+    FR 5 & Item Queries & The application should provide a route for all information about an item that the application has stored\\
 	\hline
-    FR 6 & Item Mutations & The Application should provide a Route to modify item specific information \\
+    FR 6 & Item Mutations & The application should provide a Route to modify and add items \\
 	\hline
-    FR 7 & Rating Queries & The Application should provide a Route to get all Ratings of all Users at once or a specific user or item \\
+    FR 7 & Rating Queries & The application should provide a route to get all the ratings of all users at once, or a specific user or item\\
 	\hline
-    FR 8 & User Similarity & The Application should provide a Route to get all Similarities of a specific user and Similarity Algorithm to all other users in form of a number  \\
+    FR 8 & User Similarity & The application should provide a route to get all similarities of a specific user with an http parameter to select a similarity algorithm and return a number \\
 	\hline
-    FR 9 & Item Similarity & The Application should provide a Route to get all Similarities of a specific item and Similarity Algorithm to all other items in form of a number \\
+    FR 9 & Item Similarity & The application should provide a route to get all similarities of a specific item with an http parameter to select a similarity algorithm and return a number  \\
 	\hline
-\end{tabular}
-\end{center}
-\caption{Functional Requirements}
-\label{tab:fas}
-\end{table}
+    FR 10 & User-based Recommendation & The application should provide a way to get an estimated rating for any item a particular user hasn't rated, based on other users' ratings \\
+	\hline
+    FR 11 & Item-based Recommendation & The application should provide a way to get an estimated rating for any item that a particular user hasn't rated based on item ratings \\
+	\hline
+    FR 12 & Recommendation Algorithms & The application should provide the Euclidean, Cosine, Adjusted Cosine and Pearson algorithms for possible similarity measures. \\
+	\hline
+    FR 13 & Data Saving & The application should persistently store ratings, items and users in a MySQL database \\
+	\hline
+    FR 14 & Implementation Technologies & The application should be implemented with Kotlin and the Ktor server framework \\
+	\hline
+    FR 15 & Data refreshment & The estimated ratings and similarities should be updated on request or when a rating is added \\
+	\hline
+    FR 16 & Serialization of Input and Output & The application should serialise and deserialise data into JSON for communication between clients\\
+	\hline
 
+  \caption{Functional Requirements}
+  \label{tab:fas}
+\end{longtable}
+%\end{center}
+
+%\end{table}
 
 \section{Non-Functional Requirements}
