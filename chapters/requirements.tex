@@ -1,6 +1,10 @@
 \chapter{Requirements}
 
+We now define the requirements for the recommender system. Writing requirements can help to define, document and understand the software being produced \cite{sommerville2011software}. \cite{sommerville2011software} defines different types of requirements: user requirements and system requirements. Note that we don't explicitly define user requirements, as this abstraction of the software has already been discussed in the previous chapters.
+
 \section{Functional Requirements}
+
+Below we define the functional requirements. This means that we define precise requirements that the system should fulfil, for example, with a particular user input \cite{sommerville2011software}. Since we are developing an API, user input would be a request to the web server.
 
 %\begin{table}[h]
 %\begin{center}
@@ -44,8 +48,21 @@
   \caption{Functional Requirements}
   \label{tab:fas}
 \end{longtable}
-%\end{center}
-
-%\end{table}
 
 \section{Non-Functional Requirements}
+
+We now define the non-functional requirements, which are requirements that affect the system as a whole, or requirements that don't relate to a specific function of the software \cite{sommerville2011software}.
+
+\begin{longtable}{|p{1.2cm}||p{3.2cm}|p{9cm}|}
+    \hline
+    NFR 1 & Performance & The software shouldn't take more then 1gb of RAM and should minimize network traffic.\\
+    \hline
+    NFR 2 & Testing & The software should test all similarity and recommendation algorithms in a meaningful way, including unexpected input data.\\
+    \hline
+    NFR 3 & Usage & The API should be easy for a potential developer to use through intuitive routes, query parameters and API documentation.\\
+    \hline
+    NFR 4 & Extensions & The software should be extensible with more similarity measures.\\
+    \hline
+  \caption{Non-functional Requirements}
+  \label{tab:fas}
+\end{longtable}

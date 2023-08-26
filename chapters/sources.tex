@@ -1,4 +1,155 @@
 \chapter{Appendix}
 
+\section{Application Config}
+
+\subsection{Loading the Config}
+
+\begin{minted}{kotlin}
+class ConfigLoader {
+
+    /**
+     * Searches for the config:
+     *
+     * -> as a file in the run directory
+     * -> as a file in a resource directory
+     * -> as an Environment variable: "BPM_CONFIG"
+     *
+     * @return the Config of the API as a Result
+     */
+    fun loadConfig(): Result<Config> {
+        val conf = loadConfigStr()
+        return if (conf == null) {
+            Result.failure(Error("Could not find Config!"))
+        } else {
+            Result.success(
+                createYamlParser().decodeFromString(conf)
+            )
+        }
+    }
+
+    private fun loadConfigStr(): String? {
+        return loadConfigFileFromResources()?.readText()
+            ?: System.getenv("BPM_CONFIG")
+            ?: null
+    }
+
+    private fun loadConfigFileFromResources(): File? {
+        return if (File("config.yaml").exists()) {
+            File("config.yaml")
+        } else {
+            File(
+                Thread.currentThread().contextClassLoader!!.getResource(
+                    "config.yaml"
+                )?.path
+                    ?: return null
+            )
+        }
+    }
+
+    private fun createYamlParser(): Yaml {
+        val yamlConfig = Yaml.default.configuration.copy(
+            polymorphismStyle = PolymorphismStyle.Property,
+            polymorphismPropertyName = "type"
+        )
+        return Yaml(Yaml.default.serializersModule, yamlConfig)
+    }
+}
+
+\end{minted}
+\label{code:App_conf_loading}
+
+\subsection{Config Object}
+
+\begin{minted}{kotlin}
+@Serializable
+data class Config(
+    val token: String,
+    val databases: Databases,
+    val auth: Auth,
+    val allowCORS: Boolean = false,
+    val allowedCORS: List<String> = listOf()
+)
+
+@Serializable
+data class Databases(
+    val main: SqlDatabase,
+)
+
+@Serializable
+data class SqlDatabase(
+    val host: String,
+    val port: Int,
+    val schema: String,
+    val user: String,
+    val password: String,
+)
+
+@Serializable
+data class Auth(
+    val googleSecret: String,
+)
+\end{minted}
+\label{code:App_conf_data}
+
 \section{JWT authentication Configuration}
 
+\begin{minted}{kotlin}
+class JwtConfig(jwtSecret: String) {
+    companion object Constants {
+        private const val CLAIM_USERINFO = "userinfo"
+        private const val CLAIM_USER_ROLE = "userRole"
+        private const val JWT_ISSUER = "de.matthiasklenz.upload"
+        private const val JWT_REALM = "de.matthiasklenz.upload"
+    }
+
+    private val jwtAlgorithm = Algorithm.HMAC512(jwtSecret)
+    private val jwtVerifier: JWTVerifier = JWT
+        .require(jwtAlgorithm)
+        .withIssuer(JWT_ISSUER)
+        .build()
+
+    /**
+     * Generate a token for an authenticated user
+     */
+    fun generateToken(user: User): String = JWT.create()
+        .withSubject("Authentication")
+        .withIssuer(JWT_ISSUER)
+        .withClaim(CLAIM_USERINFO, user.userinfo)
+        .withClaim(CLAIM_USER_ROLE, user.role)
+        .sign(jwtAlgorithm)
+
+    /**
+     * Configure the jwt ktor authentication feature
+     */
+    fun configureKtorFeature(
+        config: JWTAuthenticationProvider.Config,
+    ) = with(config) {
+        verifier(jwtVerifier)
+        realm = JWT_REALM
+        validate {
+            val userinfo = it.payload.getClaim(
+                CLAIM_USERINFO
+            ).asString()
+            val userRole = it.payload.getClaim(
+                CLAIM_USER_ROLE
+            ).asString()
+
+            if (userinfo != null && userRole != null) {
+                User(userinfo, userRole)
+            } else {
+                null
+            }
+        }
+    }
+
+    /**
+     * data object, that contains information of a user that is 
+     * authenticated via jwt
+     */
+    data class User(
+        val userinfo: String,
+        val role: String,
+    ) : Principal
+}
+\end{minted}
+\label{code:JWT_conf}
