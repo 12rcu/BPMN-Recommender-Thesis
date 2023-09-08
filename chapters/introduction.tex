@@ -2,19 +2,27 @@
 
 \section{Motivation}
 
-Every business has processes, and with scale these processes become more complex, making business process modelling (BPM) increasingly important today \cite{bpmComparison}.
+Every business has processes for payments, manufacturing, development or other purposes, and as scale increases these processes become more complex, making business process modelling (BPM) increasingly important \cite{bpmComparison}.
 
 % Business process modelling (BPM) is becoming increasingly important these days as it's an effective way of modelling business processes that every company has \cite{bpmComparison}.
 
-Business process modelling can help to analyse and visualise a process to gain a better understanding of the established process in a business environment. To get this overview, it is sometimes necessary to learn the specific notation used to get the full picture of what is happening.
+Business process modelling can help to analyse and visualise a process to gain a better understanding of the established process in a business environment. To get this overview, it is sometimes necessary to learn the specific Business process modelling notation (BPMN) used to get the full picture of what is happening.
 
-Today, there is an abundance of business process modelling methods available \cite{bpm_survey}. \cite{bpm_review_framework} has already noticed that the decision on which notation to use is quite difficult, as each process has different requirements on the BPM notation in order to convey what is important. \cite{bpm_review_framework} has also created a table with characteristics of the most common notations to help decide which notation to use.
+Today, there is an abundance of business process modelling methods available \cite{bpm_survey}. \cite{bpm_review_framework} has already noticed that the decision on which BPMN to use is quite difficult, as each process has different requirements on the BPMN in order to convey what is important. \cite{bpm_review_framework} has also created a table with characteristics of the most common notations to help decide which BPMN to use.
 
 \section{Objective}
 
-By addressing the problem of deciding which BPM notation to use, the aim of this paper is to provide the BPM notation with the help of a recommender system. This is done by rating certain nations and based on these ratings a recommendation for unrated BPM notations is given. In this way, a user can be recommended a BPM notation they may never have heard of.
+By addressing the problem of deciding which BPMN to use, the aim of this paper is to provide the BPMN with the help of a recommender system. This is done by rating certain nations and based on these ratings a recommendation for unrated BPM notations is given. In this way, a user can be recommended a BPMN they may never have heard of.
 
-The scope of the recommender is an Application Programmable Interface (API) and not a full application with an user interface and/or user experience (UI/UX). 
+The scope of the recommender is an Application Programmable Interface (API) and not a full application with an user interface and/or user experience (UI/UX). Although we provide a demo software that includes them to get a better understanding of the API.
 
 \section{Structure}
 
+After describing the motivation and objectives, Chapter \ref{chap:background} describes the theoretical background necessary to understand the implementation of the software. In Section \ref{sec:background_recommend}, we take a closer look at the recommendation systems and algorithms we want to use. In Section \ref{sec:background_bpmn} we describe some notations for modelling business processes and their characteristics. 
+In Chapter \ref{chap:related_work} we briefly talk about related work and other implementations similar to this paper. 
+We then begin the development process by describing the functional requirements in Section \ref{sec:func_requiremnts} and the non-functional requirements in Section  \ref{sec:non_func_requiremnts}.
+In Section \ref{sec:design_concept} we start with the concept and design. In Section \ref{sec:technologies} we look at the technologies, frameworks and libraries we use in the software. We then discuss the architecture in Section \ref{sec:architecture} and the development process in general in Section \ref{sec:dev_process}. 
+To demonstrate the software in Chapter \ref{chap:demo}, a simple web application has been developed, we talk about the concept in Section \ref{sec:demo_concept}, the technologies in Section \ref{sec:demo_tec} and the implementation in Section \ref{sec:demo_impl}. 
+We then talk about how to deploy the software in Chapter \ref{chap:deployment}, breaking this down into the different technologies that need to be deployed, so we describe how to deploy the software using Docker in Section \ref{sec:docker}, how to deploy the database in Section \ref{sec:sql}, and how to automate the process using Github Actions in section \ref{sec:github_actions}. 
+After deployment, we check that the requirements defined in Chapter \ref{chap:requiremnts} have been met (Chapter \ref{chap:check_req}). 
+Finally, in Chapter \ref{chap:conclusion}, we conclude the paper and give some thoughts on limitations (Section \ref{sec:limitations}), what could be done in the future (Section \ref{sec:future_work}), and how the software could be reused in other projects (Section \ref{sec:repurpose}).

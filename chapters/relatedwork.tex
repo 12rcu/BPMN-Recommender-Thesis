@@ -1,12 +1,27 @@
 \chapter{Related Work}
 
+\label{chap:related_work}
+
 In this section we will talk about related work, mainly similar ideas and additional work that may further develop this paper.
 
+\cite{recommend_BPM_Baysen} created a recommender system using a Bayesian network. This proposed approach utilises characteristics of the environment and metadata of a process to be modelled, such as size, type or company size. 
 
-\cite{similarity-bpm} carried out an analysis of similar business process modelling notations to find duplicates in an existing system. \cite{similarity-bpm}'s approach was to look at the characteristics of the different business process modelling notations. In this paper we don't look at these
-and focus only on user ratings, although content-based filtering may be a possible development in the future.
+\cite{similarity-bpm} also conducted an analysis of similar business process modelling notations. Although this is not a recommender system, \cite{similarity-bpm} has taken the first step in finding similarities between different business process modelling notations that could be used in a recommender system. These similarities could be found through the characteristics that a notation contains. This approach for a recommender system would be the content based collaborative filtering approach.
 
 The drawback on characterising business process modelling notations is to find charactersitics that all notations can achive or not.
 The most common business process modelling characteristics were summarised by \cite{bpm_review_framework}. These characteristics could be fed into a recommender system to make a content-based recommendation.
 
 \cite{zimochMentalLoad} conducted a sample study to determine the mental load of eight commonly used business process modelling notations. This analysis can also be used for a feature within the recommender system.
+
+Another point is the psychological aspects, where the learning curve for some BPMN is very steep, as described in \cite{koschmider2011recommendation}. \cite{koschmider2011recommendation} suggest the following approach to mitigate this steep learning curve and suggest the following steps to make BPMN more accessible: 
+
+\begin{itemize}
+    \item Modeling support through tools and process reuse
+    \item Tagging, to recommend a BPMN based on tags
+    \item Process and Service search
+    \item BPMN similarity search through tags: this allows a user to switch to a similar notation if they don't like one
+    \item Ranking mechanisms: allowing a user to see what other people are using 
+    \item Usage of a Recommender system
+\end{itemize}
+
+With these proposed approaches, it should be possible for a user to find and use a BPMN without any prior knowledge.

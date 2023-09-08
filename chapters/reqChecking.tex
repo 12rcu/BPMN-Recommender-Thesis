@@ -1,1 +1,70 @@
 \chapter{Requirements Checking}
+
+\label{chap:check_req}
+
+In this chapter we check whether the functional and non-functional requirements defined in Chapter 4 have been met. An additional column is added to indicate whether the requirement has been met (+), partially met (0) or not met (-).
+
+\section{Checking the Functional Requirements}
+
+\label{seq:check_func_req}
+
+\begin{longtable}{|p{1.2cm}||p{3.2cm}|p{8cm}|p{1cm}|}
+    \hline
+	  FR & Name & Description & +/0/-\\
+	\hline
+	FR 1 & Application & The application should be a REST Api written in Kotlin, accessible through the web & + \\
+    \hline
+	FR 2 & Authentication & Each Request to the API should be authenticated with a JSON web token & + \\
+	\hline
+    FR 3 & User Queries & The application should provide a route to any information about a user that the application has stored, such as the userid or username & + \\
+	\hline
+    FR 4 & User Mutation & The application should provide a Route to modify and add users & + \\
+	\hline
+    FR 5 & Item Queries & The application should provide a route for all information about an item that the application has stored & +\\
+	\hline
+    FR 6 & Item Mutations & The application should provide a Route to modify and add items & + \\
+	\hline
+    FR 7 & Rating Queries & The application should provide a route to get all the ratings of all users at once, or a specific user or item & +\\
+	\hline
+    FR 8 & User Similarity & The application should provide a route to get all similarities of a specific user with an http parameter to select a similarity algorithm and return a number  & +\\
+	\hline
+    FR 9 & Item Similarity & The application should provide a route to get all similarities of a specific item with an http parameter to select a similarity algorithm and return a number   & +\\
+	\hline
+    FR 10 & User-based Recommendation & The application should provide a way to get an estimated rating for any item a particular user hasn't rated, based on other users' ratings & + \\
+	\hline
+    FR 11 & Item-based Recommendation & The application should provide a way to get an estimated rating for any item that a particular user hasn't rated based on item ratings & + \\
+	\hline
+    FR 12 & Recommendation Algorithms & The application should provide the Euclidean, Cosine, Adjusted Cosine and Pearson algorithms for possible similarity measures. & + \\
+	\hline
+    FR 13 & Data Saving & The application should persistently store ratings, items and users in a MySQL database & + \\
+	\hline
+    FR 14 & Implementation Technologies & The application should be implemented with Kotlin and the Ktor server framework & + \\
+	\hline
+    FR 15 & Data refreshment & The estimated ratings and similarities should be updated on request or when a rating is added & + \\
+	\hline
+    FR 16 & Serialization of Input and Output & The application should serialise and deserialise data into JSON for communication between clients & +\\
+	\hline
+
+  \caption{Checking Functional Requirements}
+  \label{tab:c-fas}
+\end{longtable}
+
+\section{Checking the Non-Functional Requirements}
+
+\label{sec:check_non_func_req}
+
+\begin{longtable}{|p{1.2cm}||p{3.2cm}|p{8cm}|p{1cm}|}
+    \hline
+	  FR & Name & Description & +/0/-\\
+    \hline
+    NFR 1 & Performance & The software shouldn't take more then 1gb of RAM and should minimize network traffic. & +\\
+    \hline
+    NFR 2 & Testing & The software should test all similarity and recommendation algorithms in a meaningful way, including unexpected input data. & +\\
+    \hline
+    NFR 3 & Usage & The API should be easy for a potential developer to use through intuitive routes, query parameters and API documentation. & +\\
+    \hline
+    NFR 4 & Extensions & The software should be extensible with more similarity measures. & +\\
+    \hline
+  \caption{Checking Non-functional Requirements}
+  \label{tab:c-nfas}
+\end{longtable}

@@ -1,10 +1,14 @@
 \chapter{Requirements}
 
-We now define the requirements for the recommender system. Writing requirements can help to define, document and understand the software being produced \cite{sommerville2011software}. \cite{sommerville2011software} defines different types of requirements: user requirements and system requirements. Note that we don't explicitly define user requirements, as this abstraction of the software has already been discussed in the previous chapters.
+\label{chap:requiremnts}
+
+We now define the requirements for the recommender system. Writing requirements can help to define, document and understand the software being produced \cite{sommerville2011software}. \cite{sommerville2011software} defines different types of requirements: user requirements and system requirements. User requirements are the requirements that are identified during the design phase and with people who may not have a technical understanding of the software to be developed. So user requirements are more focused on the goal of the software. We don't explicitly define user requirements because we have already given a motivation and a goal for the software.
 
 \section{Functional Requirements}
 
-Below we define the functional requirements. This means that we define precise requirements that the system should fulfil, for example, with a particular user input \cite{sommerville2011software}. Since we are developing an API, user input would be a request to the web server.
+\label{sec:func_requiremnts}
+
+Below we define the functional requirements. This means that we define precise requirements for the system to meet, such as what the desired outcome is for a particular user input \cite{sommerville2011software}. Since we are developing an API, user input would be a request to the web server.
 
 %\begin{table}[h]
 %\begin{center}
@@ -51,6 +55,8 @@ Below we define the functional requirements. This means that we define precise r
 
 \section{Non-Functional Requirements}
 
+\label{sec:non_func_requiremnts}
+
 We now define the non-functional requirements, which are requirements that affect the system as a whole, or requirements that don't relate to a specific function of the software \cite{sommerville2011software}.
 
 \begin{longtable}{|p{1.2cm}||p{3.2cm}|p{9cm}|}
@@ -64,5 +70,5 @@ We now define the non-functional requirements, which are requirements that affec
     NFR 4 & Extensions & The software should be extensible with more similarity measures.\\
     \hline
   \caption{Non-functional Requirements}
-  \label{tab:fas}
+  \label{tab:nfas}
 \end{longtable}

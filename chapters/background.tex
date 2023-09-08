@@ -1,12 +1,16 @@
 \chapter{Background}
 
+\label{chap:background}
+
 \section{Recommender Systems}
 
-A recommender system uses data to suggest potentially interesting items to users, including items that the a user may not have heard of before \cite{LU20121}. Items refer to products, services or other objects that can be evaluated. 
+\label{sec:background_recommend}
+
+A recommender system uses data to suggest potentially interesting items to users, including items that a user may not have heard of before \cite{LU20121}. Items refer to products, services or other objects that can be evaluated. 
 
 The recommendations produced by a recommender system can be personalized recommendations and may differ from user to user \cite{LU20121}. These recommendations can be represented by scores on unrated items. A higher score indicates that an item could be preferred over an item with a lower score.
 
-In the following we define a target user where we try to find a recommendation for set user.
+In the following we define a target user and try to find a recommendation for set user.
 
 We now classify recommender systems like \cite{LU20121, itemColFiltRecom} into:
 
@@ -20,15 +24,9 @@ In this paper, we only use algorithms that are in the Collaborative Filtering do
 The Collaborative Filtering approach can be further divided into:
 
 \begin{itemize}
-    \item User (or memory) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach uses all user ratings and compares the target user ratings with all other ratings to find other users similar to the target user \cite{itemColFiltRecom}. 
+    \item User (or memory) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach uses all ratings from all users and compares the target user's ratings to all other ratings to find users similar to the target user.\cite{itemColFiltRecom}. 
 
 Our assumption is that if users can come to an agreement on one item, then they can also come to an agreement on other items \cite{LU20121}.
-    
-    %%%%%%%%%% das hier könnte ein zitat sein nochmal überprüfen %%%%%%%%%%%%%%%%%%%%%%
-    % This approach is based on the assumption that if users have been able to agree on something in the past, they will be able to  agree on it in the future \cite{LU20121}.  
-    %%%%%%%%%%%%%%% ende %%%%%%%%%%%%%%%%%%%
-
-    
     \item Item (or modeling) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach compares only the ratings of the target item with the ratings of other items. This allows a similarity between items to be found \cite{itemColFiltRecom}.
 \end{itemize}
 
@@ -44,9 +42,23 @@ An important task in recommending items to a target user is to determine how sim
 \begin{itemize}
     \item  \textbf{Euclidean distance}: This algorithm makes use of the euclidean distance between two vectors \cite{miningOfMassiveDatasets}. In this case, we take all of a user's ratings as a vector in an n-dimensional space, where n is the number of items. We can then calculate the distance to another vector, or in this case another user. One problem with this algorithm is how to deal with unrated items, since we can't compare two points with different dimensions. In this case we simply set the unvalued points to zero, so that the two points have the same dimensions again.
 
+    \newpage
+
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/recommend/euclidian_distance_vis.drawio.png}
+    \caption{\label{fig:recommend_euclid}Euclidean distance with two items and two user ratings}
+    \end{figure}
+
     \item \textbf{Cosine distance}: This algorithm has a similar approach to the Euclidean distance, but with the cosine distance we compare the angle of the direction of the vectors \cite{miningOfMassiveDatasets}. In this case, we don't take into account the length of the vector, which can make the recommendation imprecise. This doesn't mean that the recommendation is worse than, for example, the Euclidean distance.
 
-    \item \textbf{Pearson distance (Adjusted Cosine for Item based Collaborative Filtering)}: With Pearson, we use the same approach as with cosine distance, but in this case we normalise the ratings of all users. Normalisation avoids the problem of unrated items being given too much weight in the final recommendation \cite{miningOfMassiveDatasets}. This is the case when there is a user bias, that is, when the user is rating items in an overwhelmingly positive or negative way.
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/recommend/cosine_distance_vis.drawio.png}
+    \caption{\label{fig:recommend_euclid}Cosine distance wit two items and two user ratings}
+    \end{figure}
+
+    \item \textbf{Pearson distance (Adjusted Cosine for Item based Collaborative Filtering)}: With Pearson, we use the same approach as with cosine distance, but with Pearson we normalise the ratings of all users before calculating a distance. Normalisation avoids the problem of favouring ratings from users with similar user biases to the target user \cite{miningOfMassiveDatasets}. A user bias occurs when a user rates items overwhelmingly positively or negatively. 
 
 With the adjusted cosine (in item-based filtering domain), we don't want to normalise the item ratings because the item bias is the recommendation. Instead, we also normalise the user ratings as we do with the Pearson distance and then use the adjusted ratings for the cosine distance \cite{miningOfMassiveDatasets}.
 
@@ -73,9 +85,11 @@ M_{w} = \frac{\sum_{i=1}^{k}{rating_i * similarity_i}}{\sum_{i=1}^{k}{similarity
 \end{equation}
 
 
-This estimate reflects a possible rating of the target user. It has also the advantage that it can be used to check the recommendation system by trying to guess a rating the user has already given and checking how much the estimated rating differs from the actual rating \cite{miningOfMassiveDatasets}. 
+This estimate reflects a possible rating of the target user. It also has the advantage that it can be used to test the recommendation system by trying to guess a rating that the user has already given and checking how much the estimated rating differs from the actual rating \cite{miningOfMassiveDatasets}. 
 
 \section{Business Process Modelling Notations}
+
+\label{sec:background_bpmn}
 
 Business process modelling is an approach of describing the logical process in a business environment with a desired outcome \cite{bpm_review_framework}. Although many organisations use whiteboards or Microsoft Office to model processes, there is a trend towards using formal business process modelling notations (BPMN) \cite{ebpma-tec-standards, bpm_review_framework}. The benefits of formal BPMN are precision and reliability, so that everyone involved doesn't have to guess what different components of a notation mean \cite{ebpma-tec-standards}.
 
@@ -84,20 +98,59 @@ There are many BPMNs to choose from, \cite{bpm_review_framework} categorises the
 \begin{itemize}
     
     \item \textbf{Flow Chart technique}: a simple, flexible and graphical approach to process modelling. Because of it's flexible design, it can also be used for logical sequences or as an organisation chart. 
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/3]{images/BPMN/flow_sample.drawio.png}
+    \caption{\label{fig:bpmn_flow_chart}Flow Chart}
+    \end{figure}
+
     
     \item \textbf{Data Flow diagrams}: a diagramming that visualises the flow of data or information between locations. It's often used between analysts and users because it's easy to understand and the connection points can be easily split to get more information.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/3]{images/BPMN/dataflow_sample.drawio.png}
+    \caption{\label{fig:bpmn_dataflow_diagram}Data Flow Diagram}
+    \end{figure}
+
+\newpage
     
     \item \textbf{Role activity diagrams}: a diagram that visualises a process from the perspective of a single role. Roles are abstract and describe a desired behaviour like an object in an object-oriented environment.
     
     \item \textbf{Role interaction diagrams}: A matrix-like diagram that describes a process through activities or connections between roles. Activities are actions a user can take, such as ordering a product. It's not as flexible as a flow chart, but still easy to understand.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/BPMN/role_int_sample.drawio.png}
+    \caption{\label{fig:bpmn_RID_chart}Role interaction diagram}
+    \end{figure}
     
-    \item \textbf{Gantt Chart}: a matrix that describes a process through activities and time periods. The matrix also includes names/actors or skill levels that perform an activity.
+    \item \textbf{Gantt Chart}: a matrix that describes a process through activities and time periods. The matrix can also includes names/actors or skill levels that perform an activity.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/BPMN/Gnatt_sample.drawio.png}
+    \caption{\label{fig:bpmn_gnatt_chart}Gantt Chart}
+    \end{figure}
     
     \item \textbf{Integrated Definition for Function Modelling (IDEF)}: is a family of methods for modelling processes. The most useful are IDEF0 and IDEF3 for business process modelling and use activities that can also be represented as a sequence.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/BPMN/idef_sample.drawio.png}
+    \caption{\label{fig:bpmn_IDEF_diagram}IDEF0 diagram}
+    \end{figure}
     
     \item \textbf{Coloured Petri-net}: is a graphical language that is useful when working with many processes that communicate and synchronise. The model contains modules, which in turn contain places and connections between them.
     
-    \item \textbf{object oriented methods}: combines data structures and behaviour. This allows an object to represent an entity that has a function in the real world and to interact with other entities.
+    \item \textbf{Object oriented methods}: combines data structures and behaviour. This allows an object to represent an entity that has a function in the real world and to interact with other entities.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth/2]{images/BPMN/uml_sample.drawio.png}
+    \caption{\label{fig:bpmn_uml_diagram}UML diagram as a example of object oriented methods}
+    \end{figure}
     
     \item \textbf{Workflow technique}: as the name suggests, data and information is passed from one node to another for further processing. Each node can take actions to achieve a common goal with other nodes. 
     

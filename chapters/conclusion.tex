@@ -1,12 +1,37 @@
 \chapter{Conclusion}
 
+\label{chap:conclusion}
+
+The motivation for this paper was the fact that it's quite difficult to find and select a BPMN for a specific purpose. Therefore, a recommendation application has been developed to investigate the possibility of recommending the BPMN and to see what drawbacks there are, but also what advantages there are. 
+
 \section{Limitations}
 
-Das Kapitel muss eventuel wo anders hin da hier nochmal was neues kommt.
+\label{sec:limitations}
 
-As in \cite{itemColFiltRecom} described, the recommendation algorithms used have problems with:
+A caviat was noticed during development and we would like to point this out: We always talked about a user getting a recommendation, but usually a company needs a BPMN for a specific purpose, such as modelling a payment process. So it probably makes more sense to create a user for each department within a company than to create a user for the whole company.
+
+Another limitation, as noted by \cite{itemColFiltRecom}, the recommendation algorithms used have problems with:
 
 \begin{itemize}
     \item Sparsity: If the ratings table is nearly empty, the recommendation may break down, as single ratings can push the recommendation to an item that wouldn't normally be selected.
-    \item Scalability: Currently, for each recommendation request, the API makes a database request for all ratings for all users and calculates the recommendation for a given user. This is currently acceptable as there aren't many items and reviews. This can be mitigated through caching but not solved... TODO
+    \item Scalability: Currently, for each recommendation request, the API makes a database request for all ratings for all users and calculates the recommendation for a given user. This is currently acceptable as there aren't many items and reviews. This can be mitigated by caching, so that the recommendation is calculated once and cached. When a user rates an item, all user recommendations have to be recalculated, but as this is time consuming, a cache can always provide a recommendation. But with caching, that recommendation may be out of date.
 \end{itemize}
+
+\section{Future Work}
+
+\label{sec:future_work}
+
+We will now have a look at how the software could be further developed to improve the recommendation experience.
+The recommendation software can be extended in a number of ways:
+
+\begin{itemize}
+     \item More similarity measures: The most obvious way is to include more similarity measures to compare users and items, giving more options for different use cases.
+     \item Content based filtering: Another approach could be to characterise the BPM notations to create a recommendation system based on content-based filtering. 
+     \item More BPM notations: Adding more BPM notations can help improve the overall recommender system, as the recommender system can recommend more items to the user, and with more items rated, the calculation of similarity becomes more accurate.
+\end{itemize}
+
+\section{Other Purposes of Use}
+
+\label{sec:repurpose}
+
+Because the recommendation system is modular, it can also be reused. The BPM notations are only database entries, so the recommendations could also be made for other types of items. However, if this software is to be built on top of a dataset and/or with an existing database, the database access objects will need to be modified to retrieve user and item data from the existing data source.
