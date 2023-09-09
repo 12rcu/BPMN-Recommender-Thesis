@@ -26,7 +26,7 @@ The Collaborative Filtering approach can be further divided into:
 \begin{itemize}
     \item User (or memory) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach uses all ratings from all users and compares the target user's ratings to all other ratings to find users similar to the target user.\cite{itemColFiltRecom}. 
 
-Our assumption is that if users can come to an agreement on one item, then they can also come to an agreement on other items \cite{LU20121}.
+Our assumption is that if users can agree on one item, they will also be able to agree on other items \cite{LU20121}.
     \item Item (or modeling) based collaborative filtering \cite{itemColFiltRecom, LU20121}: This approach compares only the ratings of the target item with the ratings of other items. This allows a similarity between items to be found \cite{itemColFiltRecom}.
 \end{itemize}
 
@@ -35,7 +35,7 @@ A representative rating would be, for example, the 5 star rating system used by 
 
 \subsection{Similarity}
 
-In this section we will mainly talk about user-based collaborative filtering, the same applies to item-based collaborative filtering. We will explicitly address the differences.
+In this section, our main focus is on user-based collaborative filtering, which also applies to item-based collaborative filtering. We explicitly acknowledge the differences.
 
 An important task in recommending items to a target user is to determine how similar the target user is to other users. To get a better understanding of how similarity between users can work, similarity is treated as a distance: the closer users are to each other, the more similar they are. We consider the following algorithms to calculate such a distance:
 
@@ -55,7 +55,7 @@ An important task in recommending items to a target user is to determine how sim
     \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth/2]{images/recommend/cosine_distance_vis.drawio.png}
-    \caption{\label{fig:recommend_euclid}Cosine distance wit two items and two user ratings}
+    \caption{\label{fig:recommend_euclid}Cosine distance with two items and two user ratings}
     \end{figure}
 
     \item \textbf{Pearson distance (Adjusted Cosine for Item based Collaborative Filtering)}: With Pearson, we use the same approach as with cosine distance, but with Pearson we normalise the ratings of all users before calculating a distance. Normalisation avoids the problem of favouring ratings from users with similar user biases to the target user \cite{miningOfMassiveDatasets}. A user bias occurs when a user rates items overwhelmingly positively or negatively. 
@@ -68,7 +68,7 @@ Using these similarity measures, we can now select the most similar neighbours.
 
 \subsection{Recommend an item}
 
-Once we have found the k nearest neighbours, we can calculate an estimated rating of an unrated item for the target user. 
+Once we have found the nearest neighbours knn, we can calculate an estimated rating of an unrated item for the target user. 
 
 With user-based collaborative filtering, we look at the ratings of the k nearest users of an item that the target user hasn't rated. The average of these ratings can then be used as an indicator of whether or not the target user would like the item.
 
@@ -144,12 +144,12 @@ There are many BPMNs to choose from, \cite{bpm_review_framework} categorises the
     
     \item \textbf{Coloured Petri-net}: is a graphical language that is useful when working with many processes that communicate and synchronise. The model contains modules, which in turn contain places and connections between them.
     
-    \item \textbf{Object oriented methods}: combines data structures and behaviour. This allows an object to represent an entity that has a function in the real world and to interact with other entities.
+    \item \textbf{Object oriented methods}: combines data structures and behaviour. This allows an object to represent an entity that has a function in the real world. It can also interact with other entities.
 
     \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth/2]{images/BPMN/uml_sample.drawio.png}
-    \caption{\label{fig:bpmn_uml_diagram}UML diagram as a example of object oriented methods}
+    \caption{\label{fig:bpmn_uml_diagram}UML diagram as an example of object-oriented methods}
     \end{figure}
     
     \item \textbf{Workflow technique}: as the name suggests, data and information is passed from one node to another for further processing. Each node can take actions to achieve a common goal with other nodes. 
